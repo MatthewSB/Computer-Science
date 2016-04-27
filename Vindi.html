@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>C9 Sneaky_Bot</title>
+        <style>
+        body{
+            background-color:#0099FF;
+        }
+p {
+    text-indent: 25px;
+}
+body{
+    font-size: 110%;
+    
+}
+</style>
+    </head>
+    <body>
+<h1>C9 Sneaky_Bot</h1>
+<h2>Describing Vindinium</h2>
+<h4>What is Vindinium.org?</h4>
+<p>Vindinium.org is a place where people can battle other people with bots that they have coded. That way to win is in 1200 turns you need to capture as many mines as you can to collect gold. Every turn you will lose 1 health but if you get down to 1 health you will not die. The way to heal is by going to a tavern. Taverns are around the map and look like Root Beer Glasses. The taverns heal for 50 heath and cost 2 gold to buy a drink.s</p>
+<h4>How my Bot plays.</h4>
+<p>My bot is called C9 Sneaky. My bot's main goal was the capture mines but if he had contol of all of the mines on the map then he would go after the bot that had the most or if he had the most gold then the person who had the second most gold.
+<h4>How my Bot wins.</h4>
+<p>The way that my bot wins is by having control and taking other peoples mines. Most peoples bots do not know how to take mines if enemy bos have them. Since mine does he has a major advantage over his competition. Usually I enter in 2 bots because it is easyer to control the map becuase they like to focus on capturing mines and not going after enemy bots.</p>
+<h2>Describing the Code</h2>
+<h4>Going to taverns</h4>
+<code><pre> if (task === "taverns") {
+            var closesttavern = bot.taverns[0];
+            for (i = 0; i <bot.taverns.length; i++) {
+                if (bot.findDistance(myPos, closesttavern) > bot.findDistance(myPos, bot.taverns[i])) {
+                    closesttavern = bot.taverns[i];
+                }
+            }
+            console.log("Going to tavern!");
+            myDir = bot.findPath(myPos, closesttavern);</pre></code>
+            <p> This this the first task that I wanted my bot to be able to do, go to taverns. The first line is to say that that code is to go to taverns. The Second line of code is for the bot to go to the closest tavern. The third and forth line of code is for finding the bots distance and then the distance to go the the tavern. And at the end it is saying that when it goes tot he tavern it will say "Going to tavern!" in the Console that the bot runs in. It also finds the direction the bot is going to go to get to the tavern.</p>
+<h4>Stealing Enemy mines / All mines</h4>
+<code><pre> var enemyMines = [];
+        if (bot.yourBot.id != 1) enemyMines = enemyMines.concat(bot.bot1mines);
+        if (bot.yourBot.id != 2) enemyMines = enemyMines.concat(bot.bot2mines);
+        if (bot.yourBot.id != 3) enemyMines = enemyMines.concat(bot.bot3mines);
+        if (bot.yourBot.id != 4) enemyMines = enemyMines.concat(bot.bot4mines);
+
+        var allMines = enemyMines.concat(bot.freeMines)
+        
+        
+        
+           if (task === "allMines") {
+            var closestMine = allMines[0];
+            for (i = 0; i < allMines.length; i++) {
+                if (bot.findDistance(myPos, closestMine) > bot.findDistance(myPos, allMines[i])) {
+                    closestMine = allMines[i];
+                }
+            }
+            console.log("Claiming a Mine!");
+            myDir = bot.findPath(myPos, closestMine);
+        }
+        </pre></code>
+<p>The first 5 lines of code are all finding the enemy talking about all of the enemy bots and there mines. The fifth line of code is saying that enemy Mines and free mines to be called allMines so that the bot will go to the closest mine enemy or free. The next part of code is taling about what allMines is called where it determines the mines that are closest to it and finds a path to get there.</p>
+
+<h4>Attacking Enemy bots</h4>
+<code><pre>        if (task === "attack") {
+         var richerBot = enemyBots[0];
+        for (i = 0; i < enemyBots.length; i++) {
+            if (bot.yourBot.mineCount < enemyBots[i].mineCount) {
+                richerBot = enemyBots[i];
+            }
+        }
+            console.log("Attacking Bot");
+            myDir = bot.findPath(myPos , [richerBot.pos.x , richerBot.pos.y]);
+        
+        }</pre></code>
+<p>The first line is written to make it a task called attack to run the code. The code is made to attack anyone that is richer than my bot.The bot finds where the richer bot is and goes after it. </p>
+
+<h4>Decision making</h4>
+<code><pre>
+    var task;
+        if (bot.yourBot.life < 65) {
+            task = "taverns"
+        }
+        else if (allMines.length === 0){
+        task = "attack"
+        }
+        else {
+            task = "allMines";
+        }
+        </pre></code>
+<p>The code is if my bot is below 65 health then he will go to the tavern.This is so that he can capture one mine and mabye two if they are close. If he is above 65 health then he will go to the closest mine and if he has all of the mines he will go after the Richest guy. This is because I think that the main focus should be getting gold and not going after other players that have more gold then you. </p>
+<h2>What I learned about AI</h2>
+<p>My bot was able to acomplish everything that I wanted it to do. The way that my bot did everything was kind of hard to do but in the end when I fighured it out I was a ble to acomplish everything that I wanted to do. I always thought that AI was cool but now I understand it more.</p>
+<img id="A" src="http://vindinium.org/assets/img/ui/player3.png">
+<p>Thank you for listening</p>
+</body>
+</html>
+
